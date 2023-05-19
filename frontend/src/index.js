@@ -6,6 +6,7 @@ import { SnackbarProvider } from "notistack"
 import { AppContextProvider } from "./contexts/app.context"
 
 import App from './App';
+import "./index.css"
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement)

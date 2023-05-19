@@ -1,0 +1,112 @@
+{
+    "quiz": [
+        {
+            "id": 1,
+            "category": "math",
+            "description": "math 10 grade is so easy for everyone, you can reach 8, 9 point in every exam after do this quiz",
+            "image": "https://vnmedia.monkeyuni.net/upload/web/storage_web/20-05-2022_14:47:24_phep-toan-cho-be-5-tuoi.jpg",
+            "questions": [
+                {
+                    "text": "Câu nào sau đây không là mệnh đề?",
+                    "options": [{"id": 1 , "text":  "x > 2"}, {"id": 2 , "text":  "3 < 1"}, {"id": 3 , "text":  "4 - 5 = 1"}, {"id": 4 , "text":  "Tam giác đều là tam giác có ba cạnh bằng nhau"} ],
+                    "correctOptionId": 1
+                },
+                {
+                    "text": "Cho 90° < a < 180°. Kết luận nào sau đây đúng",
+                    "options": [{"id": 1 , "text":  "sin(a) > 0; cos(a) > 0"}, {"id": 2 , "text":  " sin(a) > 0; cos(a) < 0"}, {"id": 3 , "text":  "sin(a) < 0; cos(a) > 0"}, {"id": 4 , "text":  "sin(a) < 0; cos(a) < 0"}],
+                    "correctOptionId": 2
+                },
+                {
+                    "text": "Giả sử biết số đúng là 8217,3. Sai số tuyệt đối khi quy tròn số này đến hàng trục là",
+                    "options": [{"id": 1, "text": "7,3"}, {"id": 2, "text": "2,3"}, {"id": 3, "text": "0.3"}, {"id": 4, "text": "2.7"} ],
+                    "correctOptionId": 4
+                },
+                {
+                    "text": "Bạn An muốn mua một cây bút mực và một cây bút chì. Các cây bút mực có 8  màu khác nhau, các cây bút chì cũng có 8 màu khác nhau. Như vậy bạn An có bao nhiêu cách chọn.",
+                    "options": [{"id": 1, "text": "64"}, {"id": 2, "text": "16"}, {"id": 3, "text": "32"}, {"id": 4, "text": "24"}],
+                    "correctOptionId": 1
+                },
+                {
+                    "text": "Một người vào cửa hàng ăn, người đó chọn thực đơn gồm 1 món ăn trong 5 món, 1 loại quả tráng miệng trong 5 loại quả tráng miệng và 1 nước uống trong 3 loại nước uống. Có bao nhiêu cách chọn thực đơn",
+                    "options": [{"id": 1, "text": "25"}, {"id": 2, "text": "75"}, {"id": 3, "text": "100"}, {"id": 4, "text": "15"}],
+                    "correctOptionId": 2 
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "category": "literature",
+            "description": "try this man, dare you done all this question in this quiz",
+            "image": "https://static.toiimg.com/imagenext/toiblogs/photo/readersblog/wp-content/uploads/2021/02/litreture-TOI.jpg",
+            "questions": [
+                {
+                    "text": "Văn học Việt Nam do các bộ phận văn học nào hợp thành?",
+                    "options": [{"id": 1, "text": "Văn học dân gian và văn học trung đại"}, {"id": 2, "text": "Văn học trung đại và văn học hiện đại"}, {"id": 3, "text": "Văn học hiện đại và văn học dân gian"}, {"id": 4, "text": " Văn học dân gian và văn học viết"}],
+                    "correctOptionId": 4
+                },
+                {
+                    "text": "Đặc điểm cơ bản nhất của thể loại truyền kỳ là gì?",
+                    "options": [{"id": 1, "text": "Dùng yếu tố hoang đường, kỳ ảo làm phương thức nghệ thuật để phản ánh đời sống hiện thực"}, {"id": 2, "text": " Lựa chọn những sự kiện lịch sử của quá khứ để phản ánh hiện thực"}, {"id": 3, "text": "Có giá trị hiện thực và nhân đạo cao"}, {"id": 4, "text": "Truyền bá niềm tin vào những điều tốt đẹp cho nhân dân"}],
+                    "correctOptionId": 1
+                },
+                {
+                    "text": "Thời kì văn học Việt Nam từ đầu thế kỉ XX - Cách mạng Tháng Tám 1945 có sự chuyển biến lớn là do đâu?",
+                    "options": [{"id": 1, "text": "Lịch sử Việt Nam có sự thay đổi lớn"}, {"id": 2, "text": " Nền văn học Việt Nam có sự xuất hiện của các nhà trí thức yêu nước"}, {"id": 3, "text": "Tư tưởng văn hóa Phương Đông du nhập"}, {"id": 4, "text": "Cơ cấu xã hội Việt Nam thay đổi"}],
+                    "correctOptionId": 1
+                },
+                {
+                    "text": "Nghề in ra đời ở Việt Nam vào khoảng thời gian nào?",
+                    "options": [{"id": 1, "text": "Thời kì văn học từ đầu thế kỉ XX- Cách mạng Tháng Tám 1945"}, {"id": 2, "text": "Thời kì văn học từ đầu thế kỉ XIX- Cách mạng Tháng Tám 1945"}, {"id": 3, "text": "Thời kì văn học từ cuối thế kỉ XIX- Cách mạng Tháng Tám 1945"}, {"id": 4, "text": "Thời kì văn học từ đầu thế kỉ XVIII- Cách mạng Tháng Tám 1945"}],
+                    "correctOptionId": 1
+                },
+                {
+                    "text": "Văn học Việt Nam từ đầu thế kỉ XX - Cách mạng tháng Tám 1945 chịu ảnh hưởng của:",
+                    "options": [{"id": 1, "text": "ăn hóa phương Đông hiện đại"}, {"id": 2, "text": "Văn hóa phương Tây cận đại"}, {"id": 3, "text": "Văn hóa phương Tây hiện đại"}, {"id": 4, "text": "Văn hóa phương Đông trung đại"}],
+                    "correctOptionId": 3
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "category": "English",
+            "description": "if you want to be more successful in your life, you must learn english. the time is best to learn english is yesterday and the second best is today",
+            "questions": [
+                {
+                    "text": "I have to take the responsibility",
+                    "options": [{"id": 1, "text": "It's I am that responsible"}, {"id": 2, "text": "It is I who am responsible"}, {"id": 3, "text": "It is me who am responsible"}, {"id": 4, "text": " It's that me is responsible"}],
+                    "correctOptionId": 2
+                },
+                {
+                    "text": "It was her story that made me cry",
+                    "options": [{"id": 1, "text": "I was made crying by her story"}, {"id": 2, "text": "I was made to cry by her story"}, {"id": 3, "text": "Her story made me crying"}, {"id": 4, "text": "Her story made me to cry"}],
+                    "correctOptionId": 2
+                },
+                {
+                    "text": "It is unlikely that he will come on time",
+                    "options": [{"id": 1, "text": "He is unlikely to come early"}, {"id": 2, "text": "It is likely that he will not come too late"}, {"id": 3, "text": "It looks as if he will come late"}, {"id": 4, "text": "It seems that he will come lately"}],
+                    "correctOptionId": 3
+                },
+                {
+                    "text": "He became successful as a professional writer at the age of 20",
+                    "options": [{"id": 1, "text": "He did not succeed as a professional writer until he was 20"}, {"id": 2, "text": "He did not write professionally until he succeeded at the age of 20"}, {"id": 3, "text": "He succeeded as a professional writer until he was 20"}, {"id": 4, "text": "He wrote professionally until he became successful at the age of 20"}],
+                    "correctOptionId": 1
+                },
+                {
+                    "text": "Mai: “Why don't we ask Mr Brown for help?",
+                    "options": [{"id": 1, "text": "Mai asked why they did not ask Mr Brown for help"}, {"id": 2, "text": "Mai begged Mr Brown for help to find the reason"}, {"id": 3, "text": "Mai suggested that they should ask Mr Brown for help"}, {"id": 4, "text": "Mai wanted to know why Mr Brown did not help"}],
+                    "correctOptionId": 3
+                },
+                {
+                    "text": "John lied to Linda. She didn't know the reason",
+                    "options": [{"id": 1, "text": "Linda didn't believe that John lied to her"}, {"id": 2, "text": "Linda didn't know how John lied to her"}, {"id": 3, "text": "Linda didn't know that John lied to her"}, {"id": 4, "text": "Linda didn't know what John lied for"}],
+                    "correctOptionId": 4
+                },
+                {
+                    "text": "Billy did not find his cat in the garden. He found it in the garage",
+                    "options": [{"id": 1, "text": "It was the garden and garage that Billy found his cat"}, {"id": 2, "text": "It wasn't the garden that Billy did not find his cat"}, {"id": 3, "text": "It wasn't the garden but the garage that Billy found his cat"}, {"id": 4, "text": "Billy could not find his cat anywhere, even in the garage"}],
+                    "correctOptionId": 3
+                }
+            ]
+        }
+    ]
+}
