@@ -6,6 +6,7 @@ import {
   Grid,
   Container,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import useResponsive from "../../hooks/useResponsive";
 import QuizDetail from "../../components/QuizDetail";
@@ -110,12 +111,24 @@ const Home = () => {
           </Grid>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6} md={3}>
-              <Box display="flex" flexDirection="column" sx={{ gap: 2 }}>
+              <Box
+                display="flex"
+                flexDirection="column"
+                gap={2}
+                sx={{
+                  cursor: "pointer",
+                  ":hover": {
+                    borderRadius: "6px",
+                    backgroundColor: "#f4f4ff",
+                  },
+                }}
+                p={2}
+              >
                 <Typography fontSize={48} fontWeight={600} lineHeight={1.2}>
                   Our process
                 </Typography>
                 <Typography fontSize={16} sx={{ opacity: 0.7 }}>
-                  Helps you to make amazing things
+                  Helps you to make amazing things. Click to see all
                 </Typography>
               </Box>
             </Grid>
@@ -123,20 +136,10 @@ const Home = () => {
               <QuizDetail quiz={data.quiz[0]} />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <Typography fontSize={24} fontWeight={600}>
-                Our process
-              </Typography>
-              <Typography fontSize={16} sx={{ opacity: 0.7 }}>
-                Helps you to make amazing things
-              </Typography>
+              <QuizDetail quiz={data.quiz[1]} />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <Typography fontSize={24} fontWeight={600}>
-                Our process
-              </Typography>
-              <Typography fontSize={16} sx={{ opacity: 0.7 }}>
-                Helps you to make amazing things
-              </Typography>
+              <QuizDetail quiz={data.quiz[2]} />
             </Grid>
           </Grid>
         </Box>
