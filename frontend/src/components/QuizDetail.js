@@ -21,7 +21,7 @@ const QuizDetail = ({ quiz }) => {
         },
       }}
       py={3}
-      onClick={() => navigate("/quiz/" + id)}
+      onClick={() => navigate("/quiz/" + id + "/1")}
     >
       <img src={image} width={150} />
       <Typography fontSize={28} fontWeight={600}>

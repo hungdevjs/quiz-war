@@ -5,7 +5,7 @@ import Quiz from "../pages/Quiz";
 const QuizRoute = () => {
   return (
     <Routes>
-      <Route path="/:id" element={<Quiz />} />
+      <Route path="/:id/:ques" element={<Quiz />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
