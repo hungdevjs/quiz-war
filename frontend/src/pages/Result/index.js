@@ -1,5 +1,11 @@
-const Result = () => {
-    return <div>result</div>
-}
+import { Box } from "@mui/material";
 
-export default Result
+import useAppContext from "../../hooks/useAppContext";
+
+const Result = () => {
+  const { choosen } = useAppContext();
+
+  return <div>result</div>;
+};
+
+export default Result;

@@ -9,7 +9,7 @@ const Navigation = () => {
     <Routes>
       <Route path="/home" element={<HomeRoute />} />
       <Route path="/quiz/*" element={<QuizRoute />} />
-      <Route path="result" element={<ResultRoute />} />
+      <Route path="/result/*" element={<ResultRoute />} />
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );
