@@ -15,6 +15,8 @@ import data from "../../assets/jsons.json";
 import Quiz from "../Quiz";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const { isTablet, isMobile } = useResponsive();
   console.log(data);
 
@@ -123,6 +125,7 @@ const Home = () => {
                   },
                 }}
                 p={2}
+                onClick={() => navigate("/list")}
               >
                 <Typography fontSize={48} fontWeight={600} lineHeight={1.2}>
                   Our process
@@ -133,13 +136,13 @@ const Home = () => {
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <QuizDetail quiz={data.quiz[0]} />
+              <QuizDetail quiz={data.quizs[0]} />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <QuizDetail quiz={data.quiz[1]} />
+              <QuizDetail quiz={data.quizs[1]} />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <QuizDetail quiz={data.quiz[2]} />
+              <QuizDetail quiz={data.quizs[2]} />
             </Grid>
           </Grid>
         </Box>

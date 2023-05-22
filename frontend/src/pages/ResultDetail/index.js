@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import data from "../../assets/jsons.json";
+import useResponsive from "../../hooks/useResponsive";
 import useAppContext from "../../hooks/useAppContext";
 
 const ResultDetail = () => {
@@ -14,13 +15,14 @@ const ResultDetail = () => {
   const [question, setQuestion] = useState(null);
 
   const { choosen, setChoosen } = useAppContext();
+  const { isMobile, isTablet } = useResponsive();
   console.log(choosen);
 
   const params = useParams();
 
   const getData = () => {
     try {
-      const quizData = data.quiz.find((item) => item.id == params.id);
+      const quizData = data.quizs.find((item) => item.id == params.id);
       const ques = quizData.questions.find((item) => item.id == +params.ques);
       setQuestion(ques);
       setQuiz(quizData);
@@ -107,7 +109,7 @@ const ResultDetail = () => {
               Question {+params.ques} / {quiz.questions.length}
             </Typography>
             <Typography
-              fontSize={40}
+              fontSize={isMobile ? 24 : isTablet ? 32 : 40}
               fontWeight={600}
               fontFamily='"Montserrat", sans-serif'
             >

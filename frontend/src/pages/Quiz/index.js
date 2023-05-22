@@ -26,7 +26,7 @@ const Quiz = () => {
   const getData = () => {
     try {
       console.log(choosen);
-      const quizData = data.quiz.find((item) => item.id == params.id);
+      const quizData = data.quizs.find((item) => item.id == params.id);
       const ques = quizData.questions.find((item) => item.id == +params.ques);
       setQuestion(ques);
       setQuiz(quizData);

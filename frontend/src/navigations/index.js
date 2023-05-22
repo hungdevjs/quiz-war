@@ -4,6 +4,7 @@ import HomeRoute from "./HomeRoute";
 import QuizRoute from "./QuizRoute";
 import ResultRoute from "./ResultRoute";
 import ResultDetailRoute from "./ResultDetailRoute";
+import ListQuizRoute from "./ListQuizRoute";
 
 const Navigation = () => {
   return (
@@ -12,6 +13,7 @@ const Navigation = () => {
       <Route path="/quiz/*" element={<QuizRoute />} />
       <Route path="/result/*" element={<ResultRoute />} />
       <Route path="/resultdetail/*" element={<ResultDetailRoute />} />
+      <Route path="/list" element={<ListQuizRoute />} />
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );
