@@ -1,11 +1,13 @@
 import { Box, Container, Typography, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useAppContext from "../../hooks/useAppContext";
 import useResponsive from "../../hooks/useResponsive";
 
 const Result = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const { choosen } = useAppContext();
   const { isTablet, isMobile } = useResponsive();
@@ -42,6 +44,7 @@ const Result = () => {
               borderRadius: 5,
               padding: "10px 50px",
             }}
+            onClick={() => navigate("/resultdetail/" + params.id + "/1")}
           >
             Detail
           </Button>
@@ -53,6 +56,7 @@ const Result = () => {
               borderRadius: 5,
               padding: "10px 50px",
             }}
+            onClick={() => navigate("/home")}
           >
             Return to Home
           </Button>

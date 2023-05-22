@@ -4,28 +4,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import useResponsive from "../../hooks/useResponsive";
 import data from "../../assets/jsons.json";
 import useAppContext from "../../hooks/useAppContext";
 
-const Quiz = () => {
+const ResultDetail = () => {
   const navigate = useNavigate();
 
   const [quiz, setQuiz] = useState(null);
   const [question, setQuestion] = useState(null);
 
   const { choosen, setChoosen } = useAppContext();
-  const { isMobile, isTablet } = useResponsive();
+  console.log(choosen);
 
   const params = useParams();
 
-  useEffect(() => {
-    setChoosen([]);
-  }, [params.id]);
-
   const getData = () => {
     try {
-      console.log(choosen);
       const quizData = data.quiz.find((item) => item.id == params.id);
       const ques = quizData.questions.find((item) => item.id == +params.ques);
       setQuestion(ques);
@@ -40,23 +34,6 @@ const Quiz = () => {
   }, [params.id, params.ques]);
   console.log(question);
 
-  const getAnswer = (idQuestion, idOption) => {
-    try {
-      const optionChoosen = choosen.find(
-        (item) => item.idQuestion == idQuestion
-      );
-      if (!optionChoosen) setChoosen([...choosen, { idQuestion, idOption }]);
-      if (optionChoosen) {
-        const newListChoosen = choosen.filter((item) => {
-          if (item.idQuestion != idQuestion) return item;
-        });
-        setChoosen([...newListChoosen, { idQuestion, idOption }]);
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   const checkAnswer = (idQuestion, idOption) => {
     try {
       const optionChoosen = choosen.find(
@@ -64,35 +41,6 @@ const Quiz = () => {
       );
       if (optionChoosen) return true;
       return false;
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  const countCorrectAnswer = () => {
-    try {
-      console.log(choosen);
-      for (let i = 1; i < quiz.questions.length; i++) {
-        const notChoosen = choosen.find((item) => {
-          return item.idQuestion == i;
-        });
-        console.log(notChoosen);
-        if (typeof notChoosen == "undefined") {
-          enqueueSnackbar("you haven't choosen answer for question " + i, {
-            variant: "error",
-          });
-          return "";
-        }
-      }
-      let count = 0;
-      choosen.map((item) => {
-        const question = quiz.questions.find(
-          (ques) => ques.id == item.idQuestion
-        );
-        console.log(question);
-        if (question.correctOptionId == item.idOption) count++;
-      });
-      navigate("/result/" + params.id + "/" + count);
     } catch (err) {
       console.log(err.message);
     }
@@ -127,7 +75,7 @@ const Quiz = () => {
         sx={{ cursor: "pointer" }}
         onClick={() =>
           +params.ques != 1
-            ? navigate("/quiz/" + params.id + "/" + (+params.ques + -1))
+            ? navigate("/resultdetail/" + params.id + "/" + (+params.ques + -1))
             : {}
         }
       >
@@ -159,7 +107,7 @@ const Quiz = () => {
               Question {+params.ques} / {quiz.questions.length}
             </Typography>
             <Typography
-              fontSize={isMobile ? 24 : isTablet ? 32 : 40}
+              fontSize={40}
               fontWeight={600}
               fontFamily='"Montserrat", sans-serif'
             >
@@ -179,17 +127,20 @@ const Quiz = () => {
                   id={option.id}
                   borderRadius={5}
                   backgroundColor={
-                    checkAnswer(question.id, option.id) == true
-                      ? "blue"
+                    checkAnswer(question.id, option.id) == true &&
+                    option.id != question.correctOptionId
+                      ? "tomato"
+                      : option.id == question.correctOptionId
+                      ? "#108cfe"
                       : "#f2f2f2"
                   }
+                  border="10px"
                   display="flex"
                   alignItems="center"
                   width="50vw"
                   p={2}
                   fontFamily='"Montserrat", sans-serif'
                   sx={{ opacity: 0.8, cursor: "pointer" }}
-                  onClick={() => getAnswer(question.id, option.id)}
                 >
                   {option.text}
                 </Box>
@@ -208,11 +159,15 @@ const Quiz = () => {
           }}
           onClick={() =>
             +params.ques == quiz?.questions.length
-              ? countCorrectAnswer()
-              : navigate("/quiz/" + params.id + "/" + (+params.ques + 1))
+              ? navigate("/home")
+              : navigate(
+                  "/resultdetail/" + params.id + "/" + (+params.ques + 1)
+                )
           }
         >
-          {+params.ques == quiz?.questions.length ? "Submit" : "Next Question "}
+          {+params.ques == quiz?.questions.length
+            ? "Return to Home"
+            : "Next Question "}
           <img
             src="/rightArrow.png"
             style={{
@@ -226,4 +181,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default ResultDetail;
