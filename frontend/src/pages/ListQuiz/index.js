@@ -37,7 +37,7 @@ const ListQuiz = () => {
           </Box>
           <Box display="flex" flexDirection="column" gap={2}>
             {data.quizs.map((quiz) => {
-              return <QuizDetail id={quiz.id} quiz={quiz} />;
+              return <QuizDetail key={quiz.id} quiz={quiz} />;
             })}
           </Box>
         </Box>

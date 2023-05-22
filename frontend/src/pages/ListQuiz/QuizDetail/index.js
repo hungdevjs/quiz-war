@@ -24,7 +24,12 @@ const QuizDetail = ({ quiz }) => {
         gap={2}
       >
         <Box display="flex" alignItems="center">
-          <img src={image} width="100px" />
+          <img
+            src={image}
+            width="100px"
+            height="90px"
+            style={{ borderRadius: 6 }}
+          />
         </Box>
         <Box width={isMobile ? "200px" : isTablet ? "300px" : "500px"}>
           <Typography

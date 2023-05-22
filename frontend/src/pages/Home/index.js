@@ -6,6 +6,7 @@ import {
   Grid,
   Container,
 } from "@mui/material";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useResponsive from "../../hooks/useResponsive";
@@ -20,8 +21,12 @@ const Home = () => {
   const { isTablet, isMobile } = useResponsive();
   console.log(data);
 
+  useEffect(() => {
+    localStorage.removeItem("choosen");
+  }, []);
+
   return (
-    <Box display="flex" flexDirection="column" alignItems="center">
+    <Box display="flex" flexDirection="column" alignItems="center" pb={5}>
       <Container>
         <Box display="flex" alignItems="center" gap={2} py={2}>
           <img src="/logo.png" style={{ width: "50px" }} />
@@ -39,7 +44,14 @@ const Home = () => {
       <Divider sx={{ alignSelf: "stretch" }} />
       <Container>
         <Box display="flex" flexDirection="column" gap={2}>
-          <Grid container spacing={isTablet ? 5 : 3} py={5}>
+          <Grid
+            container
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            spacing={isTablet ? 5 : 3}
+            py={5}
+          >
             <Grid item sx={12} md={6}>
               <Box
                 display="flex"
@@ -53,6 +65,7 @@ const Home = () => {
                     fontSize={isMobile ? 48 : 84}
                     fontWeight={600}
                     lineHeight={1.2}
+                    fontFamily='"Montserrat", sans-serif'
                   >
                     Web & Mobile
                   </Typography>
@@ -60,6 +73,7 @@ const Home = () => {
                     fontSize={isMobile ? 48 : 84}
                     fontWeight={600}
                     lineHeight={1.2}
+                    fontFamily='"Montserrat", sans-serif'
                   >
                     Design
                   </Typography>
@@ -67,11 +81,16 @@ const Home = () => {
                     fontSize={isMobile ? 48 : 84}
                     fontWeight={600}
                     lineHeight={1.2}
+                    fontFamily='"Montserrat", sans-serif'
                   >
                     Developer
                   </Typography>
                 </Box>
-                <Typography fontSize={isMobile ? 18 : 24} sx={{ opacity: 0.7 }}>
+                <Typography
+                  fontSize={isMobile ? 18 : 24}
+                  sx={{ opacity: 0.7 }}
+                  fontFamily='"Montserrat", sans-serif'
+                >
                   helps you to organize your income and expenses
                 </Typography>
                 <Box display="flex" gap={1}>
@@ -82,6 +101,7 @@ const Home = () => {
                       backgroundColor: "#7854f7",
                       ":hover": { backgroundColor: "#7854f7" },
                     }}
+                    fontFamily='"Montserrat", sans-serif'
                   >
                     Try for free <img src="/downArrow.png" />{" "}
                   </Button>
@@ -91,6 +111,7 @@ const Home = () => {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
+                    fontFamily='"Montserrat", sans-serif'
                   >
                     - Web, iOS and Android
                   </Typography>
@@ -114,8 +135,11 @@ const Home = () => {
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6} md={3}>
               <Box
+                height="100%"
                 display="flex"
                 flexDirection="column"
+                justifyContent="center"
+                // alignItems="center"
                 gap={2}
                 sx={{
                   cursor: "pointer",

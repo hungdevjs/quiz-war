@@ -21,13 +21,15 @@ const QuizDetail = ({ quiz }) => {
         },
       }}
       py={3}
+      px={2}
+      height={300}
       onClick={() => navigate("/quiz/" + id + "/1")}
     >
-      <img src={image} width={150} />
+      <img src={image} width={125} height={125} style={{ borderRadius: 10 }} />
       <Typography fontSize={28} fontWeight={600}>
         {category}
       </Typography>
-      <Typography fontSize={14} sx={{ opacity: 0.7 }}>
+      <Typography fontSize={16} sx={{ opacity: 0.7 }}>
         {description}
       </Typography>
     </Box>

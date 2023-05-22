@@ -20,6 +20,12 @@ const ResultDetail = () => {
 
   const params = useParams();
 
+  useEffect(() => {
+    if (localStorage.getItem("choosen"))
+      setChoosen(JSON.parse(localStorage.getItem("choosen")));
+    console.log(JSON.parse(localStorage.getItem("choosen")));
+  }, []);
+
   const getData = () => {
     try {
       const quizData = data.quizs.find((item) => item.id == params.id);
@@ -52,19 +58,21 @@ const ResultDetail = () => {
 
   if (!quiz) return;
   return (
-    <Box display="flex" flexDirection="column" px={3} gap={2}>
+    <Box display="flex" flexDirection="column" px={3} gap={2} height="100vh">
       <Box display="flex" py={1} gap={2}>
         {quiz?.questions.map((item, index) => {
           return (
             <Box
-              id={item.id}
+              key={item.id}
               sx={{
-                backgroundColor:
-                  +params.ques >= index + 1 ? "#ffb901" : "#eeeeee",
+                backgroundColor: "#ffb901",
               }}
               width={100 / quiz?.questions.length + "%"}
               height="10px"
               borderRadius="6px"
+              onClick={() =>
+                navigate("/resultdetail/" + params.id + "/" + (index + 1))
+              }
             ></Box>
           );
         })}
@@ -72,7 +80,7 @@ const ResultDetail = () => {
       <Box
         display="flex"
         gap={1}
-        pb={10}
+        pb={isMobile ? 4 : isTablet ? 8 : 10}
         alignItems="center"
         sx={{ cursor: "pointer" }}
         onClick={() =>
@@ -110,7 +118,7 @@ const ResultDetail = () => {
             </Typography>
             <Typography
               fontSize={isMobile ? 24 : isTablet ? 32 : 40}
-              fontWeight={600}
+              fontWeight={700}
               fontFamily='"Montserrat", sans-serif'
             >
               {question.text}
@@ -126,7 +134,7 @@ const ResultDetail = () => {
             {question.options.map((option) => {
               return (
                 <Box
-                  id={option.id}
+                  key={option.id}
                   borderRadius={5}
                   backgroundColor={
                     checkAnswer(question.id, option.id) == true &&
@@ -139,10 +147,10 @@ const ResultDetail = () => {
                   border="10px"
                   display="flex"
                   alignItems="center"
-                  width="50vw"
+                  width={isMobile ? "90vw" : isTablet ? "75vw" : "50vw"}
                   p={2}
                   fontFamily='"Montserrat", sans-serif'
-                  sx={{ opacity: 0.8, cursor: "pointer" }}
+                  fontWeight={600}
                 >
                   {option.text}
                 </Box>
@@ -151,7 +159,13 @@ const ResultDetail = () => {
           </Box>
         </Box>
       </Box>
-      <Box display="flex" justifyContent="center" gap={2}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="flex-end"
+        pb={25}
+        gap={2}
+      >
         <Button
           variant="contained"
           sx={{

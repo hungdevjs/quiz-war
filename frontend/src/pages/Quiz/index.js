@@ -20,12 +20,13 @@ const Quiz = () => {
   const params = useParams();
 
   useEffect(() => {
-    setChoosen([]);
-  }, [params.id]);
+    if (localStorage.getItem("choosen"))
+      setChoosen(JSON.parse(localStorage.getItem("choosen")));
+    console.log(JSON.parse(localStorage.getItem("choosen")));
+  }, []);
 
   const getData = () => {
     try {
-      console.log(choosen);
       const quizData = data.quizs.find((item) => item.id == params.id);
       const ques = quizData.questions.find((item) => item.id == +params.ques);
       setQuestion(ques);
@@ -38,20 +39,33 @@ const Quiz = () => {
   useEffect(() => {
     getData();
   }, [params.id, params.ques]);
-  console.log(question);
 
   const getAnswer = (idQuestion, idOption) => {
     try {
+      console.log(choosen);
+      console.log({ idQuestion }, { idOption });
       const optionChoosen = choosen.find(
         (item) => item.idQuestion == idQuestion
       );
-      if (!optionChoosen) setChoosen([...choosen, { idQuestion, idOption }]);
+      if (!optionChoosen) {
+        localStorage.setItem(
+          "choosen",
+          JSON.stringify([...choosen, { idQuestion, idOption }])
+        );
+        setChoosen([...choosen, { idQuestion, idOption }]);
+      }
       if (optionChoosen) {
         const newListChoosen = choosen.filter((item) => {
           if (item.idQuestion != idQuestion) return item;
         });
+        localStorage.setItem(
+          "choosen",
+          JSON.stringify([...newListChoosen, { idQuestion, idOption }])
+        );
         setChoosen([...newListChoosen, { idQuestion, idOption }]);
       }
+      //   console.log(choosen);
+      //   localStorage.setItem("choosen", JSON.stringify(choosen));
     } catch (err) {
       console.log(err.message);
     }
@@ -59,6 +73,7 @@ const Quiz = () => {
 
   const checkAnswer = (idQuestion, idOption) => {
     try {
+      console.log(choosen);
       const optionChoosen = choosen.find(
         (item) => item.idQuestion == idQuestion && item.idOption == idOption
       );
@@ -98,23 +113,36 @@ const Quiz = () => {
     }
   };
 
+  const checkNotChoosen = (idQuestion) => {
+    try {
+      const item = choosen.find((item) => item.idQuestion == idQuestion);
+      if (item) return true;
+      return false;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   console.log(choosen);
 
   if (!quiz) return;
   return (
-    <Box display="flex" flexDirection="column" px={3} gap={2}>
+    <Box display="flex" flexDirection="column" px={3} gap={2} height="100vh">
       <Box display="flex" py={1} gap={2}>
         {quiz?.questions.map((item, index) => {
           return (
             <Box
-              id={item.id}
+              key={item.id}
               sx={{
-                backgroundColor:
-                  +params.ques >= index + 1 ? "#ffb901" : "#eeeeee",
+                backgroundColor: checkNotChoosen(item.id)
+                  ? "#ffb901"
+                  : "#eeeeee",
+                cursor: "pointer",
               }}
               width={100 / quiz?.questions.length + "%"}
               height="10px"
               borderRadius="6px"
+              onClick={() => navigate("/quiz/" + params.id + "/" + (index + 1))}
             ></Box>
           );
         })}
@@ -122,7 +150,7 @@ const Quiz = () => {
       <Box
         display="flex"
         gap={1}
-        pb={10}
+        pb={isMobile ? 4 : isTablet ? 8 : 10}
         alignItems="center"
         sx={{ cursor: "pointer" }}
         onClick={() =>
@@ -149,7 +177,7 @@ const Quiz = () => {
             justifyContent="center"
             alignItems="center"
             gap={2}
-            px={5}
+            px={isMobile ? 1 : isTablet ? 2 : 5}
           >
             <Typography
               color="#ffc221"
@@ -159,8 +187,8 @@ const Quiz = () => {
               Question {+params.ques} / {quiz.questions.length}
             </Typography>
             <Typography
-              fontSize={isMobile ? 24 : isTablet ? 32 : 40}
-              fontWeight={600}
+              fontSize={isMobile ? 20 : isTablet ? 32 : 40}
+              fontWeight={700}
               fontFamily='"Montserrat", sans-serif'
             >
               {question.text}
@@ -176,19 +204,21 @@ const Quiz = () => {
             {question.options.map((option) => {
               return (
                 <Box
-                  id={option.id}
+                  key={option.id}
                   borderRadius={5}
-                  backgroundColor={
+                  backgroundColor="#f2f2f2"
+                  border={
                     checkAnswer(question.id, option.id) == true
-                      ? "blue"
-                      : "#f2f2f2"
+                      ? "1px solid #108cfe"
+                      : "0"
                   }
                   display="flex"
                   alignItems="center"
-                  width="50vw"
+                  width={isMobile ? "90vw" : isTablet ? "75vw" : "50vw"}
                   p={2}
                   fontFamily='"Montserrat", sans-serif'
-                  sx={{ opacity: 0.8, cursor: "pointer" }}
+                  fontWeight={600}
+                  sx={{ cursor: "pointer" }}
                   onClick={() => getAnswer(question.id, option.id)}
                 >
                   {option.text}
@@ -198,7 +228,14 @@ const Quiz = () => {
           </Box>
         </Box>
       </Box>
-      <Box display="flex" justifyContent="center" gap={2}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="flex-end"
+        flexGrow={1}
+        gap={2}
+        pb={isMobile ? 20 : isTablet ? 1 : 25}
+      >
         <Button
           variant="contained"
           sx={{
