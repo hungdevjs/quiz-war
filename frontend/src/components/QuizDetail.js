@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const QuizDetail = ({ quiz }) => {
@@ -7,31 +7,38 @@ const QuizDetail = ({ quiz }) => {
   const { category, description, image, id } = quiz;
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      gap={2}
-      sx={{
-        cursor: "pointer",
-        ":hover": {
-          borderRadius: "6px",
-          backgroundColor: "#f4f4ff",
-        },
-      }}
-      py={3}
-      px={2}
-      height={300}
-      onClick={() => navigate("/quiz/" + id + "/1")}
-    >
-      <img src={image} width={125} height={125} style={{ borderRadius: 10 }} />
-      <Typography fontSize={28} fontWeight={600}>
-        {category}
-      </Typography>
-      <Typography fontSize={16} sx={{ opacity: 0.7 }}>
-        {description}
-      </Typography>
+    <Box display="flex" justifyContent="center" alignItems="center">
+      <Card
+        sx={{ width: "100%", height: 300, cursor: "pointer" }}
+        onClick={() => navigate("/quiz/" + id + "/1")}
+      >
+        <CardMedia sx={{ height: 140 }} image={image} title="green iguana" />
+        <CardContent>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              fontWeight={600}
+              fontFamily='"Montserrat", sans-serif'
+            >
+              {category}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              fontFamily='"Montserrat", sans-serif'
+            >
+              {description}
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
     </Box>
   );
 };

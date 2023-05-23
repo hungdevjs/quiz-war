@@ -44,7 +44,7 @@ const Result = () => {
               borderRadius: 5,
               padding: "10px 50px",
             }}
-            onClick={() => navigate("/resultdetail/" + params.id + "/1")}
+            onClick={() => navigate("/quiz/" + params.id + "/1")}
           >
             Detail
           </Button>

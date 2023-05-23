@@ -22,6 +22,7 @@ const Quiz = () => {
   useEffect(() => {
     if (localStorage.getItem("choosen"))
       setChoosen(JSON.parse(localStorage.getItem("choosen")));
+    if (!localStorage.getItem("choosen")) setChoosen([]);
     console.log(JSON.parse(localStorage.getItem("choosen")));
   }, []);
 
@@ -64,6 +65,11 @@ const Quiz = () => {
         );
         setChoosen([...newListChoosen, { idQuestion, idOption }]);
       }
+      if (
+        !localStorage.getItem("count") &&
+        params.ques != quiz.questions.length
+      )
+        navigate("/quiz/" + params.id + "/" + (+params.ques + 1));
       //   console.log(choosen);
       //   localStorage.setItem("choosen", JSON.stringify(choosen));
     } catch (err) {
@@ -108,16 +114,7 @@ const Quiz = () => {
         if (question.correctOptionId == item.idOption) count++;
       });
       navigate("/result/" + params.id + "/" + count);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  const checkNotChoosen = (idQuestion) => {
-    try {
-      const item = choosen.find((item) => item.idQuestion == idQuestion);
-      if (item) return true;
-      return false;
+      localStorage.setItem("count", count);
     } catch (err) {
       console.log(err.message);
     }
@@ -134,7 +131,9 @@ const Quiz = () => {
             <Box
               key={item.id}
               sx={{
-                backgroundColor: checkNotChoosen(item.id)
+                backgroundColor: localStorage.getItem("count")
+                  ? "#ffb901"
+                  : params.ques > index
                   ? "#ffb901"
                   : "#eeeeee",
                 cursor: "pointer",
@@ -147,29 +146,81 @@ const Quiz = () => {
           );
         })}
       </Box>
-      <Box
-        display="flex"
-        gap={1}
-        pb={isMobile ? 4 : isTablet ? 8 : 10}
-        alignItems="center"
-        sx={{ cursor: "pointer" }}
-        onClick={() =>
-          +params.ques != 1
-            ? navigate("/quiz/" + params.id + "/" + (+params.ques + -1))
-            : {}
-        }
-      >
-        <img src="/leftArrow.png" style={{ cursor: "pointer" }} />
-        <Typography
-          sx={{ opacity: 0.7 }}
-          fontFamily='"Montserrat", sans-serif'
-          fontSize={12}
-          fontWeight={600}
-        >
-          PREVIOUS
-        </Typography>
+      <Box display="flex" justifyContent="space-between">
+        <Box display="flex">
+          <Typography
+            sx={{ opacity: 0.7, cursor: "pointer" }}
+            fontFamily='"Montserrat", sans-serif'
+            fontSize={12}
+            fontWeight={600}
+            onClick={() => navigate("/home")}
+          >
+            BACK TO HOME
+          </Typography>
+        </Box>
+        <Box display="flex" gap={3}>
+          <Box
+            display="flex"
+            gap={1}
+            pb={isMobile ? 4 : isTablet ? 8 : 10}
+            alignItems="center"
+            sx={{ cursor: "pointer" }}
+            onClick={() =>
+              +params.ques != 1
+                ? navigate("/quiz/" + params.id + "/" + (+params.ques + -1))
+                : {}
+            }
+          >
+            <img src="/leftArrow.png" style={{ cursor: "pointer" }} />
+            <Typography
+              sx={{ opacity: 0.7 }}
+              fontFamily='"Montserrat", sans-serif'
+              fontSize={12}
+              fontWeight={600}
+            >
+              PREVIOUS
+            </Typography>
+          </Box>
+          <Box
+            display="flex"
+            gap={1}
+            pb={isMobile ? 4 : isTablet ? 8 : 10}
+            alignItems="center"
+            sx={{ cursor: "pointer" }}
+            onClick={() =>
+              +params.ques == quiz?.questions.length &&
+              localStorage.getItem("count")
+                ? navigate("home")
+                : +params.ques == quiz?.questions.length
+                ? countCorrectAnswer()
+                : navigate("/quiz/" + params.id + "/" + (+params.ques + 1))
+            }
+          >
+            {" "}
+            <Typography
+              sx={{ opacity: 0.7 }}
+              fontFamily='"Montserrat", sans-serif'
+              fontSize={12}
+              fontWeight={600}
+            >
+              {+params.ques != quiz?.questions.length
+                ? "NEXT"
+                : localStorage.getItem("count")
+                ? "Return to home"
+                : "Submit"}
+            </Typography>
+            <img
+              src="/rightArrow2.png"
+              style={{
+                cursor: "pointer",
+                display:
+                  +params.ques == quiz?.questions.length ? "none" : "flex",
+              }}
+            />
+          </Box>
+        </Box>
       </Box>
-      <Box display="flex" justifyContent="center" pb={10}>
+      <Box display="flex" justifyContent="center" pb={4}>
         <Box display="flex" flexDirection="column" gap={3}>
           <Box
             display="flex"
@@ -206,11 +257,20 @@ const Quiz = () => {
                 <Box
                   key={option.id}
                   borderRadius={5}
-                  backgroundColor="#f2f2f2"
+                  backgroundColor={
+                    localStorage.getItem("count")
+                      ? checkAnswer(question.id, option.id) == true &&
+                        option.id != question.correctOptionId
+                        ? "tomato"
+                        : option.id == question.correctOptionId
+                        ? "#108cfe"
+                        : "#f2f2f2"
+                      : "#f2f2f2"
+                  }
                   border={
                     checkAnswer(question.id, option.id) == true
                       ? "1px solid #108cfe"
-                      : "0"
+                      : "1px solid transparent"
                   }
                   display="flex"
                   alignItems="center"
@@ -218,7 +278,9 @@ const Quiz = () => {
                   p={2}
                   fontFamily='"Montserrat", sans-serif'
                   fontWeight={600}
-                  sx={{ cursor: "pointer" }}
+                  sx={{
+                    cursor: localStorage.getItem("count") ? "auto" : "pointer",
+                  }}
                   onClick={() => getAnswer(question.id, option.id)}
                 >
                   {option.text}
@@ -227,37 +289,6 @@ const Quiz = () => {
             })}
           </Box>
         </Box>
-      </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="flex-end"
-        flexGrow={1}
-        gap={2}
-        pb={isMobile ? 20 : isTablet ? 1 : 25}
-      >
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#108cfe",
-            borderRadius: 5,
-            padding: "10px 50px",
-          }}
-          onClick={() =>
-            +params.ques == quiz?.questions.length
-              ? countCorrectAnswer()
-              : navigate("/quiz/" + params.id + "/" + (+params.ques + 1))
-          }
-        >
-          {+params.ques == quiz?.questions.length ? "Submit" : "Next Question "}
-          <img
-            src="/rightArrow.png"
-            style={{
-              paddingLeft: "10px",
-              display: +params.ques == quiz?.questions.length ? "none" : "flex",
-            }}
-          />
-        </Button>
       </Box>
     </Box>
   );

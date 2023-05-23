@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomeRoute from "./HomeRoute";
 import QuizRoute from "./QuizRoute";
 import ResultRoute from "./ResultRoute";
-import ResultDetailRoute from "./ResultDetailRoute";
 import ListQuizRoute from "./ListQuizRoute";
 
 const Navigation = () => {
@@ -12,7 +11,6 @@ const Navigation = () => {
       <Route path="/home" element={<HomeRoute />} />
       <Route path="/quiz/*" element={<QuizRoute />} />
       <Route path="/result/*" element={<ResultRoute />} />
-      <Route path="/resultdetail/*" element={<ResultDetailRoute />} />
       <Route path="/list" element={<ListQuizRoute />} />
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>

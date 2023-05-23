@@ -23,6 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.removeItem("choosen");
+    localStorage.removeItem("count");
   }, []);
 
   return (
@@ -132,14 +133,14 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm={6} md={3}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={3}>
               <Box
                 height="100%"
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
-                // alignItems="center"
+                alignItems="center"
                 gap={2}
                 sx={{
                   cursor: "pointer",
@@ -159,13 +160,13 @@ const Home = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} md={3}>
               <QuizDetail quiz={data.quizs[0]} />
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} md={3}>
               <QuizDetail quiz={data.quizs[1]} />
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} md={3}>
               <QuizDetail quiz={data.quizs[2]} />
             </Grid>
           </Grid>

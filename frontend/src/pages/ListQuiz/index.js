@@ -1,4 +1,5 @@
-import { Box, Typography, Container, Divider } from "@mui/material";
+import { Box, Typography, Container, Divider, Grid } from "@mui/material";
+import { useEffect } from "react";
 
 import useResponsive from "../../hooks/useResponsive";
 import QuizDetail from "./QuizDetail";
@@ -6,6 +7,10 @@ import data from "../../assets/jsons.json";
 
 const ListQuiz = () => {
   const { isMobile, isTablet } = useResponsive();
+  useEffect(() => {
+    localStorage.removeItem("choosen");
+    localStorage.removeItem("count");
+  }, []);
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -35,11 +40,22 @@ const ListQuiz = () => {
               List Quizs
             </Typography>
           </Box>
-          <Box display="flex" flexDirection="column" gap={2}>
+          <Grid container spacing={2}>
             {data.quizs.map((quiz) => {
-              return <QuizDetail key={quiz.id} quiz={quiz} />;
+              return (
+                <Grid item xs={12} sm={6} lg={3}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    {" "}
+                    <QuizDetail key={quiz.id} quiz={quiz} />{" "}
+                  </Box>
+                </Grid>
+              );
             })}
-          </Box>
+          </Grid>
         </Box>
       </Container>
     </Box>
